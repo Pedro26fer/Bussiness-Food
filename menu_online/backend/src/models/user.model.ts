@@ -12,7 +12,7 @@ export class UserModel {
   @Column({ unique: true, length: 255 })
   email: string;
 
-  @Column({ length: 8 })
+  @Column({ length: 255 })
   password: string;
 
   constructor() {
