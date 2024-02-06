@@ -1,8 +1,13 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserModel } from './user.model';
 import { Repository } from 'typeorm';
-import { UserSchema } from 'src/schemas/user.schema';
+import { CreateUserDto } from 'src/User/dto/create-user.dto';
 import { hashPassword } from 'utils/hashFunction';
 
 @Injectable()
@@ -12,12 +17,19 @@ export class UserService {
     private readonly userRepository: Repository<UserModel>,
   ) {}
 
-  public async create(userSchema: UserSchema): Promise<UserModel> {
-    userSchema.password = await hashPassword(userSchema.password);
-    const emailUnavaible = await this.userRepository.findOne({where:{email: userSchema.email}})
-    if(emailUnavaible){
-      throw new ForbiddenException("this email is already used")
+  public async create(userSchema: CreateUserDto): Promise<UserModel> {
+    userSchema = {
+      ...userSchema,
+      password: hashPassword(userSchema.password),
+    };
+
+    const emailUnavaible = await this.userRepository.findOne({
+      where: { email: userSchema.email },
+    });
+    if (emailUnavaible) {
+      throw new ForbiddenException('this email is already used');
     }
+
     const newUser = await this.userRepository.save(userSchema);
     return newUser;
   }
@@ -35,7 +47,7 @@ export class UserService {
     return user;
   }
 
-  public async update(id: string, body: UserSchema): Promise<UserModel> {
+  public async update(id: string, body: CreateUserDto): Promise<UserModel> {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
@@ -56,5 +68,13 @@ export class UserService {
     }
     await this.userRepository.delete(id);
     return 'User was deleted';
+  }
+
+  async findBayEmail(email:string){
+    const user = await this.userRepository.findOne({where:{email}})
+    if(!user){
+      throw new BadRequestException("Invalid token")
+    }
+    return user
   }
 }
