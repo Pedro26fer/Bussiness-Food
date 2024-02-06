@@ -1,22 +1,27 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModel } from './models/user.model';
-import { UserModule } from './modules/user.module';
+import { UserModel } from './User/user.model';
+import { UserModule } from './User/user.module';
+import {ConfigModule} from '@nestjs/config'
+import * as dotenv from 'dotenv'
 
-
+dotenv.config()
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'pedro',
-      password: '1234',
-      database: 'menu',
+      username:process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
       entities: [UserModel],
       synchronize: true,
     }),
-    UserModule
+    UserModule,
   ],
 })
 export class AppModule {}
