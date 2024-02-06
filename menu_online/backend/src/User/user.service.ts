@@ -70,7 +70,7 @@ export class UserService {
     return 'User was deleted';
   }
 
-  async findBayEmail(email:string){
+  async findByEmail(email:string){
     const user = await this.userRepository.findOne({where:{email}})
     if(!user){
       throw new BadRequestException("Invalid token")
