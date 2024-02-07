@@ -3,13 +3,15 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserModel } from './user.model';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/User/dto/create-user.dto';
 import { hashPassword } from 'utils/hashFunction';
-
+import { Request } from '@nestjs/common';
+import { AuthRequest } from 'src/auth/models/AuthRequest';
 @Injectable()
 export class UserService {
   constructor(
@@ -47,12 +49,23 @@ export class UserService {
     return user;
   }
 
-  public async update(id: string, body: CreateUserDto): Promise<UserModel> {
+  public async update(
+    req: AuthRequest,
+    id: string,
+    body: CreateUserDto,
+  ): Promise<UserModel> {
+    const userIdFromToken = req.user.id;
+    if (id !== userIdFromToken) {
+      throw new UnauthorizedException(
+        'You have not permission to do this action!',
+      );
+    }
+
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    body.password = await hashPassword(body.password);
+    body.password = hashPassword(body.password);
     const updateResult = await this.userRepository.update(id, body);
     if (updateResult.affected === 0) {
       throw new NotFoundException('User not found');
@@ -61,7 +74,13 @@ export class UserService {
     return userUpdated;
   }
 
-  public async delete(id: string): Promise<string> {
+  public async delete(req: AuthRequest, id: string): Promise<string> {
+    const userIdFromToken = req.user.id;
+    if (id !== userIdFromToken) {
+      throw new UnauthorizedException(
+        'You have not permission to do this action!',
+      );
+    }
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
@@ -70,11 +89,11 @@ export class UserService {
     return 'User was deleted';
   }
 
-  async findByEmail(email:string){
-    const user = await this.userRepository.findOne({where:{email}})
-    if(!user){
-      throw new BadRequestException("Invalid token")
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new BadRequestException('Invalid Credentials');
     }
-    return user
+    return user;
   }
 }

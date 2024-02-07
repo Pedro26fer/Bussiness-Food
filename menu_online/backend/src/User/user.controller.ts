@@ -6,21 +6,23 @@ import {
   Param,
   Post,
   Put,
+  Request,
 } from '@nestjs/common';
 import { UserModel } from 'src/User/user.model';
 import { CreateUserDto } from 'src/User/dto/create-user.dto';
 import { UserService } from './user.service';
+import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { AuthRequest } from 'src/auth/models/AuthRequest';
 
 @Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  public async create(
-    @Body() body: CreateUserDto,
-  ): Promise<any> {
+  @IsPublic()
+  public async create(@Body() body: CreateUserDto): Promise<any> {
     const newUser = await this.userService.create(body);
-    return { ...newUser, password: undefined};
+    return { ...newUser, password: undefined };
   }
 
   @Get()
@@ -39,14 +41,18 @@ export class UserController {
   public async update(
     @Param('id') id: string,
     @Body() body: CreateUserDto,
+    @Request() req: AuthRequest,
   ): Promise<{ data: UserModel }> {
-    const userUpdated = await this.userService.update(id, body);
+    const userUpdated = await this.userService.update(req, id, body);
     return { data: userUpdated };
   }
 
   @Delete(':id')
-  public async delete(@Param('id') id: string): Promise<string> {
-    const msg = await this.userService.delete(id);
+  public async delete(
+    @Param('id') id: string,
+    @Request() req: AuthRequest,
+  ): Promise<string> {
+    const msg = await this.userService.delete(req, id);
     return msg;
   }
 }

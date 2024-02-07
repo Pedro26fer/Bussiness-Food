@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './User/user.model';
 import { UserModule } from './User/user.module';
@@ -7,6 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import * as dotenv from 'dotenv';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { CategoryModule } from './Category/category.module';
+import { CategorySeeder } from './Category/seeds/category.seed';
+import { Category } from './Category/category.model';
 
 dotenv.config();
 @Module({
@@ -21,17 +24,28 @@ dotenv.config();
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [UserModel],
+      entities: [UserModel, Category],
       synchronize: true,
     }),
     UserModule,
     AuthModule,
+    CategoryModule,
   ],
   providers: [
+    CategorySeeder,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
   ],
 })
-export class AppModule {}
+
+export class AppModule implements OnApplicationBootstrap {
+  constructor(private readonly categorySeeder: CategorySeeder) {}
+
+  async onApplicationBootstrap() {
+    await this.categorySeeder.seed();
+  }
+}
+
+
