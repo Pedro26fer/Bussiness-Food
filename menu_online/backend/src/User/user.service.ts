@@ -10,7 +10,6 @@ import { UserModel } from './user.model';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/User/dto/create-user.dto';
 import { hashPassword } from 'utils/hashFunction';
-import { Request } from '@nestjs/common';
 import { AuthRequest } from 'src/auth/models/AuthRequest';
 @Injectable()
 export class UserService {
