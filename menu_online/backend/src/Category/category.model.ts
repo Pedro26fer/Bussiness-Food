@@ -1,4 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductModel } from 'src/Product/product.model';
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -15,6 +16,9 @@ export class Category {
   @OneToMany(() => Category, category => category.parent)
   children: Category[];
 
+  @ManyToMany(() => ProductModel, products => products.categories)
+  products: ProductModel[]
+  
   constructor() {
     if (!this.id) {
       this.id = uuidv4();

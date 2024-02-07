@@ -10,6 +10,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { CategoryModule } from './Category/category.module';
 import { CategorySeeder } from './Category/seeds/category.seed';
 import { Category } from './Category/category.model';
+import { ProductModule } from './Product/product.module';
 
 dotenv.config();
 @Module({
@@ -30,6 +31,7 @@ dotenv.config();
     UserModule,
     AuthModule,
     CategoryModule,
+    ProductModule,
   ],
   providers: [
     CategorySeeder,
