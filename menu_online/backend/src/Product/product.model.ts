@@ -1,4 +1,4 @@
-import { Category } from 'src/category/category.model';
+import { Category } from 'src/Category/category.model';
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,7 +7,7 @@ export class ProductModel {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => Category, category => category.products)
+  @ManyToMany(() => Category, categories => categories.products)
   @JoinTable()
   categories: Category[]
 

@@ -8,9 +8,10 @@ import * as dotenv from 'dotenv';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { CategoryModule } from './Category/category.module';
-import { CategorySeeder } from './Category/seeds/category.seed';
 import { Category } from './Category/category.model';
+import { CategorySeeder } from './Category/seeds/category.seed';
 import { ProductModule } from './Product/product.module';
+import { ProductModel } from './Product/product.model';
 
 dotenv.config();
 @Module({
@@ -25,7 +26,7 @@ dotenv.config();
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [UserModel, Category],
+      entities: [UserModel,ProductModel, Category],
       synchronize: true,
     }),
     UserModule,
@@ -41,7 +42,6 @@ dotenv.config();
     },
   ],
 })
-
 export class AppModule implements OnApplicationBootstrap {
   constructor(private readonly categorySeeder: CategorySeeder) {}
 
@@ -49,5 +49,3 @@ export class AppModule implements OnApplicationBootstrap {
     await this.categorySeeder.seed();
   }
 }
-
-

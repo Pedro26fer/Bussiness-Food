@@ -1,5 +1,5 @@
 import { ProductModel } from 'src/Product/product.model';
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -17,7 +17,8 @@ export class Category {
   children: Category[];
 
   @ManyToMany(() => ProductModel, products => products.categories)
-  products: ProductModel[]
+  @JoinTable()
+  products: any
   
   constructor() {
     if (!this.id) {
