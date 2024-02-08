@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Category } from '../category.model';
+import { CategoryModel } from '../category.model';
 
 @Injectable()
 export class CategorySeeder {
   constructor(
-    @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(CategoryModel)
+    private readonly categoryRepository: Repository<CategoryModel>,
   ) {}
 
   async seed() {
@@ -28,7 +28,7 @@ export class CategorySeeder {
 
     const createCategories = async (
       categoriesData: any[],
-      parent?: Category,
+      parent?: CategoryModel,
     ) => {
       for (const categoryData of categoriesData) {
         const { children: subcategoriesData, ...categoryParams } = categoryData;
@@ -38,7 +38,7 @@ export class CategorySeeder {
         });
 
         if (!existingCategory) {
-          const category = new Category();
+          const category = new CategoryModel();
           category.name = categoryParams.name;
           category.parent = parent;
 

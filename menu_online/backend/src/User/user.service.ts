@@ -28,7 +28,7 @@ export class UserService {
       where: { email: userSchema.email },
     });
     if (emailUnavaible) {
-      throw new ForbiddenException('this email is already used');
+      throw new ForbiddenException('This email is already used');
     }
 
     const newUser = await this.userRepository.save(userSchema);

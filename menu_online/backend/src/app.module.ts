@@ -7,11 +7,12 @@ import { AuthModule } from './auth/auth.module';
 import * as dotenv from 'dotenv';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { CategoryModule } from './Category/category.module';
-import { Category } from './Category/category.model';
 import { CategorySeeder } from './Category/seeds/category.seed';
+import { CategoryModel } from './Category/category.model';
 import { ProductModule } from './Product/product.module';
 import { ProductModel } from './Product/product.model';
+import { CategoryModule } from './Category/category.module';
+
 
 dotenv.config();
 @Module({
@@ -26,8 +27,9 @@ dotenv.config();
       username: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [UserModel,ProductModel, Category],
+      entities: [UserModel, CategoryModel, ProductModel],
       synchronize: true,
+      autoLoadEntities: true
     }),
     UserModule,
     AuthModule,

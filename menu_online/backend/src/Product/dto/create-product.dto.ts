@@ -1,9 +1,8 @@
-import { Category } from 'src/Category/category.model';
-import { ProductModel } from '../product.model';
+import { CategoryModel } from 'src/Category/category.model';
 import { Type } from 'class-transformer';
 import { IsString, IsNotEmpty, IsInt, IsDecimal, IsArray, ValidateNested } from 'class-validator';
 
-export class CreateProductDto extends ProductModel {
+export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -21,12 +20,9 @@ export class CreateProductDto extends ProductModel {
   photo: string;
 
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Category)
-  categories: Category[];
+  categories: string[];
 
   constructor(data: Partial<CreateProductDto>) {
-      super();
     Object.assign(this, data);
   }
 }

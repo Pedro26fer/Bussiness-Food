@@ -1,30 +1,38 @@
 import { ProductModel } from 'src/Product/product.model';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
-export class Category {
+export class CategoryModel {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 120 })
   name: string;
 
-  @ManyToOne(() => Category, category => category.children, { nullable: true })
-  parent: Category;
+  @ManyToOne(() => CategoryModel, (categoryCategoryModel) => categoryCategoryModel.children, {
+    nullable: true,
+  })
+  parent: CategoryModel;
 
-  @OneToMany(() => Category, category => category.parent)
-  children: Category[];
+  @OneToMany(() => CategoryModel, (categoryCategoryModel) => categoryCategoryModel.parent)
+  children: CategoryModel[];
 
-  @ManyToMany(() => ProductModel, products => products.categories)
+  @ManyToMany(() => ProductModel, (products) => products.categories)
   @JoinTable()
-  products: any
-  
+  products: ProductModel[];
+
   constructor() {
     if (!this.id) {
       this.id = uuidv4();
     }
   }
 }
-
-
