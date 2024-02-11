@@ -37,6 +37,9 @@ export class UserService {
 
   public async getAll(): Promise<UserModel[]> {
     const users = await this.userRepository.find();
+    for (let user of users) {
+      user.password = undefined;
+    }
     return users;
   }
 
@@ -45,6 +48,7 @@ export class UserService {
     if (!user) {
       throw new NotFoundException('User Not Found');
     }
+    user.password = undefined
     return user;
   }
 
@@ -69,7 +73,7 @@ export class UserService {
     if (updateResult.affected === 0) {
       throw new NotFoundException('User not found');
     }
-    const userUpdated = { ...user, ...body };
+    const userUpdated = {...user, ...body };
     return userUpdated;
   }
 
