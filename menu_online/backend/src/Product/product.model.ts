@@ -7,7 +7,7 @@ export class ProductModel {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToMany(() => CategoryModel, categories => categories.products)
+  @ManyToMany(() => CategoryModel, categories => categories.products, {onDelete:'CASCADE'})
   categories: CategoryModel[]
 
   @Column({type: 'varchar'})

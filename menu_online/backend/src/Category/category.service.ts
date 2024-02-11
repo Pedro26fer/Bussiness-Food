@@ -11,7 +11,7 @@ export class CategoryService {
   ) {}
 
   public async getAll(): Promise<CategoryModel[]> {
-    const categorys = await this.categoryRepository.find();
+    const categorys = await this.categoryRepository.find({relations:['products']});
     return categorys;
   }
 }

@@ -19,7 +19,7 @@ export class ProductService {
     private readonly categoryRepository: Repository<CategoryModel>,
     ) {}
     
-  public async create(body: CreateProductDto): Promise<ProductModel> {
+    public async create(body: CreateProductDto): Promise<ProductModel> {
     const productAlreadyExits = await this.productRepository.findOne({
       where: { name: body.name },
     });
@@ -51,18 +51,18 @@ export class ProductService {
       
       return newProduct;
     }
-
-  public async getOne(id: string) {
-    const product = await this.productRepository.findOne({
-      where: { id },
-      relations: ['categories'],
-    });
+    
+    public async getOne(id: string) {
+      const product = await this.productRepository.findOne({
+        where: { id },
+        relations: ['categories'],
+      });
     if (!product) {
       throw new NotFoundException('Not found product');
     }
     return product;
   }
-
+  
   public async update(id: string, body:ProductUpdateDTO): Promise<ProductModel> {
     
     const productUpdating = await this.productRepository.update(id, body)
@@ -71,7 +71,16 @@ export class ProductService {
     }
     const productUpdated = await this.productRepository.findOne({where:{id}, relations:['categories']})
     return {...productUpdated, ...body}
-   }
+  }
+  
+  public async delete(id: string): Promise<string> {
+    const productToBeDelete = await this.productRepository.findOne({where:{id}})
+    if(!productToBeDelete){
+      throw new NotFoundException("Product not found")
+    }
+    await this.productRepository.delete(productToBeDelete.id)
+    return "Delete succesfully"
+  }
   
   public async getAll(): Promise<ProductModel[]> {
     const products = await this.productRepository.find({
