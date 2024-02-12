@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserService } from 'src/User/user.service';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { UserModel } from 'src/User/user.model';
 import { UserPayload } from './models/UserPayload';
 import { JwtService } from '@nestjs/jwt';
