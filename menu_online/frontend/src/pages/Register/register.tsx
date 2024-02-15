@@ -4,8 +4,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import {DivPage, Form} from './styles'
+
 
 function Register() {
+  const [submited, setSubmited] = useState(false);
+
   const registerSchema = yup.object().shape({
     name: yup.string().required("Necessary field").max(120),
     email: yup
@@ -35,54 +41,65 @@ function Register() {
   const { isLoading, mutate, isError, isSuccess } = useMutation(key, (data) =>
     axios.post("http://localhost:3000/user", data)
   );
-  if (isError) {
-    alert("This email is already in use");
+
+  if (isError && submited) {
+    setSubmited(false);
+    toast.error("This email is already in use");
   }
 
-  if (isSuccess) {
+  if (isSuccess && submited) {
+    toast.success("Welcome!!");
+    setSubmited(false);
     navigate("/login");
   }
 
   const sendData = async (data: any) => {
+    setSubmited(true);
     mutate(data);
   };
 
   return (
-    <div>
+    <DivPage>
       <header>
         <h1>Sign up and manage your products</h1>
-        <span>free and complete</span>
+        <span>Free and complete</span>
       </header>
-      <form onSubmit={handleSubmit(sendData)}>
-        <label htmlFor="name">
-          Name {errors.name && <span> - {errors.name.message}</span>}
-        </label>
-        <input type="text" id="name" placeholder="Name" {...register("name")} />
+      <Form onSubmit={handleSubmit(sendData)}>
+        <div>
+          <label htmlFor="name">
+            Name {errors.name && <span> - {errors.name.message}</span>}
+          </label>
+          <input type="text" id="name" placeholder="Name" {...register("name")} />
+        </div>
 
-        <label htmlFor="email">
-          E-mail {errors.email && <span> - {errors.email.message}</span>}
-        </label>
-        <input
-          type="text"
-          id="email"
-          placeholder="xxx@email.com"
-          {...register("email")}
-        />
+        <div>
+          <label htmlFor="email">
+            E-mail {errors.email && <span> - {errors.email.message}</span>}
+          </label>        
+          <input
+            type="text"
+            id="email"
+            placeholder="xxx@email.com"
+            {...register("email")}
+            />
+        </div>
 
-        <label htmlFor="password">
-          Password{" "}
-          {errors.password && <span> - {errors.password.message}</span>}
-        </label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password")}
-        />
+        <div>
+          <label htmlFor="password">
+            Password{" "}
+            {errors.password && <span> - {errors.password.message}</span>}
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            {...register("password")}
+          />
+        </div>
 
         <button type="submit">{isLoading ? "Creating" : "Register"}</button>
-      </form>
-    </div>
+      </Form>
+    </DivPage>
   );
 }
 
