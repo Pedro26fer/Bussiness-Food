@@ -7,6 +7,7 @@ export const Header = styled.header`
     color: #ff0f2e;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 60vw;
     padding: 2%;
     box-shadow: 0px 2px 8px #2f2f2f ;
@@ -15,10 +16,17 @@ export const Header = styled.header`
     div{
         display: flex;
         align-items: center ;
-        width: 33%;
-        justify-content: center;
-        gap: 2px
-        div{
+        width: 38%;
+        height: 100%;
+        justify-content: space-around;
+        #backHome{
+            display: flex;
+            height: 50%;
+            padding: 2%;
+            align-items: center;
+        }
+
+        section{
             display: flex;
             flex-direction:column
         }
@@ -26,8 +34,8 @@ export const Header = styled.header`
 
     button{
         background-color: beige;
-        padding: 1%;
-        color: #ff0f2e
+        color: #ff0f2e;
+        height: 50%;
     }
 
 `
