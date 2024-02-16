@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import {DivPage, Form} from './styles'
+import { Link } from "react-router-dom";
 
 
 function Register() {
@@ -35,23 +36,19 @@ function Register() {
   });
 
   const navigate = useNavigate();
-
   const key = ["userPost"];
-
-  const { isLoading, mutate, isError, isSuccess } = useMutation(key, (data) =>
+  const { isLoading, mutate} = useMutation(key, (data) =>
     axios.post("http://localhost:3000/user", data)
+    .then(() => {
+      toast.success("Welcome!!");
+      setSubmited(false);
+      navigate("/login")
+    })
+    .catch((e) => {
+      setSubmited(false);
+      toast.error("This email is already in use")
+    })
   );
-
-  if (isError && submited) {
-    setSubmited(false);
-    toast.error("This email is already in use");
-  }
-
-  if (isSuccess && submited) {
-    toast.success("Welcome!!");
-    setSubmited(false);
-    navigate("/login");
-  }
 
   const sendData = async (data: any) => {
     setSubmited(true);
@@ -89,7 +86,7 @@ function Register() {
             Password{" "}
             {errors.password && <span> - {errors.password.message}</span>}
           </label>
-          <input
+          <input 
             type="password"
             id="password"
             placeholder="Password"
@@ -98,6 +95,7 @@ function Register() {
         </div>
 
         <button type="submit">{isLoading ? "Creating" : "Register"}</button>
+        <span>Is already registered ? <Link to='/login'>Go to sign-in</Link></span>
       </Form>
     </DivPage>
   );

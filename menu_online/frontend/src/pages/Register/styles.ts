@@ -32,6 +32,9 @@ export const Form = styled.form`
     border-radius: 2%;
     justify-content: space-around;
     align-items: center;
+    span{
+        color: #fa0f2e
+    }
 
     div{
         width: 70%;
