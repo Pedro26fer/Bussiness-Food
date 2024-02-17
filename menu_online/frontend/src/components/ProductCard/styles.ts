@@ -8,9 +8,21 @@ export const ProductCardStyled = styled.div`
     background-color: beige;
     border-radius: 3%;
     padding: 1% 5% 5% 5%;
-    min-width: 17vw;
+    margin-bottom: 5%;
+    width: 17vw;
     height: 37vh;
     box-shadow: 0px 6px 2px #a9a9a9;
+    position: relative;
+
+    #Trash{
+        position: absolute;
+        right:10px;
+        bottom: 10px;
+        :hover{
+            cursor: pointer;
+            color: #ff0f2e;
+        }
+    }
 
     ul {
         list-style: none;
@@ -26,9 +38,9 @@ export const ProductCardStyled = styled.div`
         }
     }    
     img{
-        min-width: 100%;
+        width: 16vw;
         border-radius: 5%;
-        max-height: 60%;
+        height: 60%;
 
     }
 

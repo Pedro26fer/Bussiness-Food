@@ -11,7 +11,8 @@ export const Header = styled.header`
     gap: 60vw;
     padding: 2%;
     box-shadow: 0px 2px 8px #2f2f2f ;
-    margin-bottom: 2%;
+
+
 
     div{
         display: flex;
@@ -36,6 +37,7 @@ export const Header = styled.header`
         background-color: beige;
         color: #ff0f2e;
         height: 50%;
+        box-shadow: 0px 6px 2px #a9a9a9;
     }
 
 `

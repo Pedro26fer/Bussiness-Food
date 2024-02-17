@@ -14,7 +14,6 @@ export const GlobalStyled = createGlobalStyle`
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
 
     font-synthesis: none;
@@ -54,13 +53,23 @@ export const GlobalStyled = createGlobalStyle`
     background-color: #fff;
     cursor: pointer;
     transition: border-color 0.25s;
+    background-color: beige;
+    color: #ff0f2e;
+    height: 50%;
+    box-shadow: 0px 6px 2px #a9a9a9;
+    height:3rem
   }
+
   button:hover {
-    border-color: #ffa20f;
+    border-color: #ffa20f
   }
   button:focus,
   button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  input:focus{
+    outline: 1px solid #ffa20f
   }
 
 

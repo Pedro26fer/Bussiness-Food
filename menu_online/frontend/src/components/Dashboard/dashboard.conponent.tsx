@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 import ProductCard from "../ProductCard/productCard.component";
@@ -8,9 +7,11 @@ import { DashboardDiv } from "./style";
 type Props = {
   products: any;
   setProducts: any;
+  setIsVisible: (boolean: boolean) => void
 };
 
-function DashBoard({ setProducts, products }: Props) {
+function DashBoard({ setProducts, products, setIsVisible }: Props) {
+
   const fetchProducts = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -32,6 +33,9 @@ function DashBoard({ setProducts, products }: Props) {
 
   return (
     <DashboardDiv>
+      <div id="buttonsDiv">
+        <button onClick={()=> setIsVisible(true)}>Add</button>
+      </div>
       <ul>
         {isLoading && <p>Loading data</p>}
         {products.map((prod: any) => (

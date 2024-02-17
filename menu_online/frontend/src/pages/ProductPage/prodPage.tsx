@@ -4,7 +4,9 @@ import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify";
 import HeaderHome from "../../components/HeaderHome/header.component";
-import { ProductPafeStyled } from "./style";
+import { ProductPageStyled } from "./style";
+import Modal from "../../components/Modal/modal";
+
 
 type Product = {
     id: string
@@ -17,7 +19,12 @@ type Product = {
     }]
 }
 
-function ProductPage(){
+type Props = {
+    isVisible: boolean
+    setIsVisible: (bool: boolean) => void
+}
+
+function ProductPage({ isVisible, setIsVisible}: Props){
 
     const { id } = useParams()
     const [product, setProduct] = useState<Product | any>({})
@@ -32,7 +39,7 @@ function ProductPage(){
             },
           });
           setProduct(response.data)
-        } catch (error) {
+        } catch (error) { 
           toast.error("Failed to loading this product");
         }
       };
@@ -42,13 +49,14 @@ function ProductPage(){
         await fetchProducts();
       });
 
-      console.log(product)
+  
 
 
     return(
-        <ProductPafeStyled>
+        <ProductPageStyled>
+            <Modal id={id} isVisible={isVisible} postOrUpdate={false} setIsVisible={setIsVisible}/>
             <HeaderHome />
-            <main>
+            <main id="mainPage">
                 <div>
                     <figure>
                         <img src={product.photo} alt="" />
@@ -63,12 +71,13 @@ function ProductPage(){
                             <li>Quantity: {product.qty}u</li>
                         </ul>
                     </section>
+                    <button onClick={() => setIsVisible(true)}>Edit</button>
                     <section>
                         <h3>Categories</h3>
                         {product.categories? (
                             <ul>
                                 {product.categories.map(((ctg :any) => (
-                                    <li>{ctg.name}</li>
+                                    <li key={ctg.id}>{ctg.name}</li>
                                 )))}
                             </ul>
                         ) : (
@@ -80,7 +89,7 @@ function ProductPage(){
                 </div>
             </main>
 
-        </ProductPafeStyled>
+        </ProductPageStyled>
     )
 }
 

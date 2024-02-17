@@ -24,8 +24,6 @@ function HeaderHome() {
 
   const decoded: Decoded = jwtDecode(token!);
 
-  console.log(location.pathname);
-
   return (
     <Header>
       <div>
