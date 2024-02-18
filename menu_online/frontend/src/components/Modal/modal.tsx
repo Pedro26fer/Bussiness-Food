@@ -21,30 +21,20 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
   ]);
   const token = localStorage.getItem("token");
 
-  const postSchema = yup.object().shape({
+  const mutateSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
     price: yup.string().required("Price is required"),
     qty: yup.number().required("This field is required"),
-    photo: yup.string().optional(),
-    categories: yup.array().of(yup.string()),
+    photo: yup.string().required("This field is required"),
+    categories: yup.array().of(yup.string()).optional(),
   });
-
-  const updateSchema = yup.object().shape({
-    name: yup.string().optional(),
-    price: yup.string().optional(),
-    qty: yup.number().optional(),
-    photo: yup.string().optional(),
-    categories: yup.array().of(yup.string()),
-  });
-
-  const chooseSchema = postOrUpdate ? postSchema : updateSchema;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(chooseSchema),
+    resolver: yupResolver(mutateSchema),
   });
 
   const queryClient = useQueryClient();
@@ -71,7 +61,7 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
         },
       });
       toast.success("Product updated");
-      queryClient.invalidateQueries("getProducts");
+      queryClient.invalidateQueries("getProduct");
       setIsVisible(false);
     } catch (error) {
       toast.error("Failed to update this product");
@@ -79,7 +69,6 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
   };
 
   const getCategories = async () => {
-    const token = localStorage.getItem("token");
     try {
       const response = await axios.get("http://localhost:3000/category", {
         headers: {
@@ -119,7 +108,9 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
         />
         <h3>{postOrUpdate ? "Adding Product" : "Editing Product"}</h3>
         <form onSubmit={handleSubmit(onSubmiting)}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">
+            Name - {errors.name && <span> - {errors.name.message}</span>}
+          </label>
           <input
             type="text"
             id="name"
@@ -127,7 +118,9 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
             {...register("name")}
           />
 
-          <label htmlFor="price">Price</label>
+          <label htmlFor="price">
+            Price - {errors.price && <span> - {errors.price.message}</span>}
+          </label>
           <input
             type="string"
             id="price"
@@ -135,7 +128,9 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
             {...register("price")}
           />
 
-          <label htmlFor="qty">Quantity</label>
+          <label htmlFor="qty">
+            Quantity - {errors.qty && <span>- Required Field</span>}
+          </label>
           <input
             type="number"
             id="qty"
@@ -143,7 +138,9 @@ function Modal({ postOrUpdate = true, isVisible, setIsVisible, id }: Props) {
             {...register("qty")}
           />
 
-          <label htmlFor="photo">Image</label>
+          <label htmlFor="photo">
+            Image - {errors.photo && <span> - {errors.photo.message}</span>}
+          </label>
           <input
             type="string"
             id="photo"

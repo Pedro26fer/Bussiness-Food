@@ -49,7 +49,7 @@ export const ProductPageStyled = styled.div`
 
     #info {
       width: 40%;
-      height: 60%;
+      min-height: 60%;
       display: flex;
       align-self: center;
       gap: 12%;

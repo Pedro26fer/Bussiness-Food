@@ -28,8 +28,8 @@ function HeaderHome() {
     <Header>
       <div>
         <h1>Bussines Food</h1>
-        <section>
-          <FcManager size={52} />
+        <section id="icons">
+          <FcManager size={32} />
           {decoded && <span>Adm: {decoded.name!}</span>}
         </section>
         {location.pathname == "/home" ? null : (

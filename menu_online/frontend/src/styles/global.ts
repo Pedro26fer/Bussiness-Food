@@ -44,6 +44,9 @@ export const GlobalStyled = createGlobalStyle`
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;

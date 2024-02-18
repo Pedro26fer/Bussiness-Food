@@ -22,8 +22,7 @@ dotenv.config();
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      // não subi o container, entao preciso que aqui esteja localhost
-      host:"localhost",
+      host:"db_menu",
       port: 5432,
       username: process.env.USER,
       password: process.env.PASSWORD,

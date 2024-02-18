@@ -75,7 +75,18 @@ export class ProductService {
       throw new NotFoundException('Product does not exits');
     }
 
-    productUpdating = { ...productUpdating, ...body };
+    let categories = []
+
+    if(body.categories){
+      for (let categoryName of body.categories) {
+        const categoryRegistered = await this.categoryRepository.findOne({
+          where: { name: categoryName },
+        });
+
+        categories.push(categoryRegistered)
+    }
+
+    productUpdating = { ...productUpdating, ...body, categories };
     this.productRepository.save(productUpdating);
 
     const productUpdated = await this.productRepository.findOne({
@@ -83,7 +94,7 @@ export class ProductService {
       relations: ['categories'],
     });
     return productUpdated;
-  }
+  }}
 
   public async delete(id: string): Promise<string> {
     const productToBeDelete = await this.productRepository.findOne({

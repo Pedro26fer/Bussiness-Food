@@ -2,17 +2,16 @@ import styled from "styled-components";
 
 export const DashboardDiv = styled.div`
   width: 100vw;
-  min-height: 80%;
+  min-height: 70%;
   padding-left: 9%;
   position: relative;
-  
-
+  gap: 2%;
 
   #buttonsDiv {
     width: 95%;
     padding: 1%;
     button {
-      position:absolute;
+      position: absolute;
       z-index: 2;
       height: 4vh;
       background-color: beige;
@@ -26,6 +25,7 @@ export const DashboardDiv = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 90%;
+    height: auto;
     list-style: none;
     gap: 4%;
   }

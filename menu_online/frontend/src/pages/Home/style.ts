@@ -7,7 +7,7 @@ export const HomePage = styled.div`
     background-color: #fff;
     color: #000;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
 
 `

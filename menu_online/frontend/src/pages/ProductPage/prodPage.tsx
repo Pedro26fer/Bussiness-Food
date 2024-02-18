@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useQuery } from "react-query"
+import { QueryClient, useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify";
 import HeaderHome from "../../components/HeaderHome/header.component";
@@ -26,6 +26,8 @@ type Props = {
 
 function ProductPage({ isVisible, setIsVisible}: Props){
 
+    const queryClient = new QueryClient()
+
     const { id } = useParams()
     const [product, setProduct] = useState<Product | any>({})
 
@@ -39,6 +41,7 @@ function ProductPage({ isVisible, setIsVisible}: Props){
             },
           });
           setProduct(response.data)
+          queryClient.invalidateQueries("getProduct")
         } catch (error) { 
           toast.error("Failed to loading this product");
         }
