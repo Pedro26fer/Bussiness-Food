@@ -38,7 +38,7 @@
   <li>Abra o terminal na raíz do projeto</li>
   <li>Rode o comando "docker compose up --build"</li>
 </ol>
-<p>Isso levatará todos os conteiners e você pode visualizá-lo no navegador na URL http://localhost:5173/</p>
+<p>Isso levantará todos os conteiners e você pode visualizar a aplicação no navegador na URL http://localhost:5173/</p>
 
 <p>Você será redirecionado para a página de cadastro. Não se preocupe, a sua senha é hasheada antes de ir para o banco de dados do conteiner</p>
 <p>Uma vez cadastrado, você pode se logar e navegar pelas funcionalidades do software.</p>
