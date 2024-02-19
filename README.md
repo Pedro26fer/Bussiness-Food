@@ -35,7 +35,7 @@
 <p>Dessa forma, para rodar o projeto em sua máquina somente será necessário os seguintes passo</p>
 <ol>
   <li>Clone este repositório para sua maquina local</li>
-  <li>Abra o terminal na raíz do projeto</li>
+  <li>Abra o terminal na pasta que contam o arquivo docker-compose</li>
   <li>Rode o comando "docker compose up --build"</li>
 </ol>
 <p>Isso levantará todos os conteiners e você pode visualizar a aplicação no navegador na URL http://localhost:5173/</p>
