@@ -10,8 +10,8 @@
 <p>Front-end</p>
 <ul>
   <li>React-js</li>
-  <li>Vite - Pela velocidade e performance que entrega ao rodas o projeto</li>
-  <li>Typescript - Inevitável é saber dos tipos de dados que estma sendo enviados e manipulados</li>
+  <li>Vite - Pela velocidade e performance que entrega ao rodar o projeto</li>
+  <li>Typescript - Inevitável é saber dos tipos de dados que estam sendo enviados e manipulados</li>
   <li>Styled-components - Pela arquitetura modularizada que se mantem. Cada componente tem seu estilo próprio</li>
   <li>JsonWebToken</li>
   <li>axios</li>
