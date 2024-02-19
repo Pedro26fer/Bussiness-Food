@@ -28,22 +28,19 @@ services:
       POSTGRES_DB: ${DATABASE}
       POSTGRES_USER: ${USER}
       POSTGRES_PASSWORD: ${PASSWORD}
-      
-  # The frontend service does not working in the docker and i don´t know how to fix this
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    container_name: vite_docker
+    ports:
+     - "5173:5173"
+    volumes:
+     - type: bind
+       source: ./
+       target: /srv/app
+    tty: true
 
-  # frontend:
-  #   image: node:latest
-  #   container_name: frontend
-  #   build: 
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "5173:5173"
-  #   command: npm run dev
-  #   volumes:
-  #     - ./frontend:/app
-  #   environment:
-  #     NODE_ENV: development
 
 
 
