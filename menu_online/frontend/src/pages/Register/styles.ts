@@ -36,6 +36,11 @@ export const Form = styled.form`
         color: #fa0f2e
     }
 
+    label{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 1.3rem;
+    }
+
     div{
         width: 70%;
         color: #000;
@@ -49,7 +54,10 @@ export const Form = styled.form`
         }
         input{
             width: 100%;
-            padding: 1%;
+            padding: 3%;
+            background-color: #eee2e2;
+            border: none;
+            border-radius: 3%;
         }
     }
 

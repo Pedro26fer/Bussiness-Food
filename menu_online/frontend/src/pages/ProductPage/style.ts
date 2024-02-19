@@ -47,6 +47,12 @@ export const ProductPageStyled = styled.div`
       color: #ff0f2e;
     }
 
+    #fork{
+      position: absolute;
+      top: 45%;
+      left: 85%;
+    }
+
     #info {
       width: 40%;
       min-height: 60%;

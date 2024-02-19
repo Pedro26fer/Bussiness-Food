@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 
 function Login() {
-  const [submited, setSubmited] = useState(false);
+  const [_, setSubmited] = useState(false);
 
   const loginShema = yup.object().shape({
     email: yup.string().required("E-mail is required").email("Invalid e-mail"),

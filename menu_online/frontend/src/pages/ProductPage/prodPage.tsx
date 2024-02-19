@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import HeaderHome from "../../components/HeaderHome/header.component";
 import { ProductPageStyled } from "./style";
 import Modal from "../../components/Modal/modal";
+import { GiForkKnifeSpoon } from "react-icons/gi";
 
 
 type Product = {
@@ -48,7 +49,7 @@ function ProductPage({ isVisible, setIsVisible}: Props){
       };
     
       const key = ["getProduct"];
-      const { isLoading } = useQuery(key, async () => {
+      const {} = useQuery(key, async () => {
         await fetchProducts();
       });
 
@@ -68,6 +69,7 @@ function ProductPage({ isVisible, setIsVisible}: Props){
                 </div>
                 <div id="info">
                     <section>
+                        <GiForkKnifeSpoon id="fork" size={52}/>
                         <h3>{product.name}</h3>
                         <ul>
                             <li>Price: $ {product.price}</li>

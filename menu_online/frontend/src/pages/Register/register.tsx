@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 
 function Register() {
-  const [submited, setSubmited] = useState(false);
+  const [_, setSubmited] = useState(false);
 
   const registerSchema = yup.object().shape({
     name: yup.string().required("Necessary field").max(120),
@@ -44,7 +44,7 @@ function Register() {
       setSubmited(false);
       navigate("/login")
     })
-    .catch((e) => {
+    .catch(() => {
       setSubmited(false);
       toast.error("This email is already in use")
     })

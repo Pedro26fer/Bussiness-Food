@@ -3,7 +3,6 @@ import { Header } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-import { useLocation } from "react-router-dom";
 
 type Decoded = {
   name: string;
@@ -27,16 +26,16 @@ function HeaderHome() {
   return (
     <Header>
       <div>
-        <h1>Bussines Food</h1>
-        <section id="icons">
-          <FcManager size={32} />
+        <section>
+          <h1>Bussines Food</h1>
+          <FcManager id="boss" size={42} />
           {decoded && <span>Adm: {decoded.name!}</span>}
+          {location.pathname == "/home" ? null : (
+            <button id="backHome" onClick={() => navigate("/home")}>
+              Home
+            </button>
+          )}
         </section>
-        {location.pathname == "/home" ? null : (
-          <button id="backHome" onClick={() => navigate("/home")}>
-            Home
-          </button>
-        )}
       </div>
       <button onClick={() => handleLogout()}>logout</button>
     </Header>

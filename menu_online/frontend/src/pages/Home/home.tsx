@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DashBoard from "../../components/Dashboard/dashboard.conponent";
 import HeaderHome from "../../components/HeaderHome/header.component";
 import { HomePage } from "./style";

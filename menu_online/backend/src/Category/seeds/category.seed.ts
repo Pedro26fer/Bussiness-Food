@@ -12,15 +12,15 @@ export class CategorySeeder {
 
   async seed() {
     const categoriesToCreate = [
-      { name: 'Italianos' },
-      { name: 'Orientais' },
+      { name: 'Italy Food' },
+      { name: 'Japanese' },
       {
-        name: 'Americano',
+        name: 'American',
         children: [
           { name: 'Hamburger' },
           {
-            name: 'Batata',
-            children: [{ name: 'Batata Frita' }, { name: 'Chips' }],
+            name: 'Steak',
+            children: [{ name: 'Chicken' }, { name: 'Soup' }],
           },
         ],
       },

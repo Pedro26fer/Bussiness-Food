@@ -9,6 +9,7 @@
       {
         "duplicate-id-aria": "off"
       }
-    ]
+    ],
+    "typescript-config/consistent-casing": "off"
   }
 }

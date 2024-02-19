@@ -1,20 +1,14 @@
-version: '3'
+version: '3.8'
 services:
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "5173:5173"
-    depends_on:
-      - backend
   backend:
+    container_name: Api
     image: node:latest
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    command: npm start
     environment:
       POSTGRES_HOST: ${DATABASE}
       POSTGRES_PORT: ${PORT}
@@ -34,5 +28,22 @@ services:
       POSTGRES_DB: ${DATABASE}
       POSTGRES_USER: ${USER}
       POSTGRES_PASSWORD: ${PASSWORD}
+      
+  # The frontend service does not working in the docker and i don´t know how to fix this
+
+  # frontend:
+  #   image: node:latest
+  #   container_name: frontend
+  #   build: 
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "5173:5173"
+  #   command: npm run dev
+  #   volumes:
+  #     - ./frontend:/app
+  #   environment:
+  #     NODE_ENV: development
+
 
 

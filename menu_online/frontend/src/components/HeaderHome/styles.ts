@@ -5,7 +5,7 @@ export const Header = styled.header`
   height: auto;
   color: #ff0f2e;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   gap: 40vw;
   padding: 2%;
@@ -14,26 +14,38 @@ export const Header = styled.header`
     font-size: 3rem;
   }
 
+
+
   div {
     display: flex;
     align-items: center;
-    width: 38%;
+    width: 48%;
     height: 100%;
-    justify-content: space-around;
+
+    gap: 10%;
+
+    span{
+      display: inline-block;
+      
+
+    }
 
     #backHome {
       display: flex;
       height: 50%;
-      padding: 2%;
-      align-items: center;
+      padding: 1%;     
+    }
+
+    #boss{
+
     }
 
     section {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
-      width: 30%;
+      justify-content: space-around;
+      width: 100%;
     }
   }
 `;
