@@ -1,6 +1,6 @@
 <h1>Bussiness Food</h1>
 <p>Este é um projeto, divertido com estética minimalista, facil de usar, testar e entender.</p>
-<p>O projeto serve como um cadápio online para donos de negócios na industria alimentícia, como por exemplo restaurantes, lanchonetes, etc.</p>
+<p>O projeto serve como um cardápio online para donos de negócios da industria alimentícia, como por exemplo restaurantes, lanchonetes, etc.</p>
 <p> Nele, donos de negócios da indústria alimentícia conseguem manter seu estoque sobre a luz do conhecimento, adicionar produtos, editar, exluir e ver.</p>
 <p>Por ser um software desenvolvido pensado para admnistradores, o acesso a todas as funcionalidades necessitam de autenticação</p>
 
@@ -38,7 +38,9 @@
   <li>Abra o terminal na raíz do projeto</li>
   <li>Rode o comando "docker compose up --build"</li>
 </ol>
-<p>Isso levatará todos os conteiners e você pode visualizá-lo no navegador na URRL http://localhost:5173/</p>
+<p>Isso levatará todos os conteiners e você pode visualizá-lo no navegador na URL http://localhost:5173/</p>
 
 <p>Você será redirecionado para a página de cadastro. Não se preocupe, a sua senha é hasheada antes de ir para o banco de dados do conteiner</p>
 <p>Uma vez cadastrado, você pode se logar e navegar pelas funcionalidades do software.</p>
+
+
