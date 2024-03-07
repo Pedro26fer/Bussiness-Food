@@ -26,18 +26,20 @@ function HeaderHome() {
   return (
     <Header>
       <div>
+        <h1>Bussines Food</h1>
         <section>
-          <h1>Bussines Food</h1>
-          <FcManager id="boss" size={42} />
-          {decoded && <span>Adm: {decoded.name!}</span>}
-          {location.pathname == "/home" ? null : (
-            <button id="backHome" onClick={() => navigate("/home")}>
-              Home
-            </button>
-          )}
+          <div id="iconAndButtonDiv">
+            <FcManager id="boss" size={34} />
+            {decoded && <span>Adm: {decoded.name!}</span>}           
+            {location.pathname == "/home" ? null : (
+              <button id="backHome" onClick={() => navigate("/home")}>
+                Home
+              </button>
+            )}
+          </div>
+          <button onClick={() => handleLogout()}>logout</button>
         </section>
       </div>
-      <button onClick={() => handleLogout()}>logout</button>
     </Header>
   );
 }

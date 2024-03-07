@@ -18,17 +18,12 @@ export const Header = styled.header`
 
   div {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 48%;
+    width: 100vw;
     height: 100%;
 
-    gap: 10%;
-
-    span{
-      display: inline-block;
-      
-
-    }
 
     #backHome {
       display: flex;
@@ -36,16 +31,33 @@ export const Header = styled.header`
       padding: 1%;     
     }
 
-    #boss{
-
+    h1 {
+      width: 70%;
+      display: inline-flex;
+      justify-content: center;
+      font-family: cursive;
     }
 
     section {
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
+      gap: 4%;
       width: 100%;
+
+      #iconAndButtonDiv{
+        justify-content: center;
+        width: 50%;
+        align-items: center;
+        flex-direction: row;
+        gap: 3%;
+        justify-content: flex-start;
+
+        #boss{
+          size: 2px;
+        }
+      }
     }
   }
 `;
